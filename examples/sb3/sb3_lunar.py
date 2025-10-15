@@ -1,6 +1,7 @@
 import gymnasium as gym
 
 from stable_baselines3 import DQN
+from stable_baselines3 import PPO
 from stable_baselines3.common.evaluation import evaluate_policy
 
 
@@ -8,7 +9,7 @@ from stable_baselines3.common.evaluation import evaluate_policy
 env = gym.make("LunarLander-v3", render_mode="rgb_array")
 
 # Instantiate the agent
-model = DQN("MlpPolicy", env, verbose=1)
+model = PPO("MlpPolicy", env, verbose=1)
 # Train the agent and display a progress bar
 model.learn(total_timesteps=int(2e5), progress_bar=True)
 # Save the agent

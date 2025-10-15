@@ -1,6 +1,6 @@
 from stable_baselines3.common.env_util import make_atari_env
 from stable_baselines3.common.vec_env import VecFrameStack
-from stable_baselines3 import A2C
+from stable_baselines3 import PPO
 
 import ale_py
 
@@ -11,7 +11,7 @@ vec_env = make_atari_env("PongNoFrameskip-v4", n_envs=4, seed=0)
 # Frame-stacking with 4 frames
 vec_env = VecFrameStack(vec_env, n_stack=4)
 
-model = A2C("CnnPolicy", vec_env, verbose=1)
+model = PPO("CnnPolicy", vec_env, verbose=1)
 model.learn(total_timesteps=25_000)
 
 obs = vec_env.reset()
