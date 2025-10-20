@@ -18,7 +18,7 @@ def main():
     agent = PytorchDqnAgent(state_space, action_space, layers)
     
     need_render = False
-    episodes = 200
+    episodes = 2000
     max_steps = 500
 
     # Setup live plot with dynamic scaling
