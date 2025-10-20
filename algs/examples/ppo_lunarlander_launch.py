@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from algs.launcher import learn_policy_problem, learn_problem, result_learning
 from algs.ppo.ppo_agent import Agent
 
-matplotlib.use("TkAgg")
+matplotlib.use("Agg")
 
 
 def main():

@@ -2,7 +2,7 @@ import gymnasium as gym
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use("TkAgg")
+matplotlib.use("Agg")
 plt.ion()
 
 from algs.dqn.dqn_agent import PytorchDqnAgent
@@ -11,7 +11,7 @@ from examples.custom_env.cartpole_leftright_env import CartPoleLeftRightEnv
 
 
 def main():
-    env = CartPoleLeftRightEnv(config={"reward_fn": "goal"})
+    env = CartPoleLeftRightEnv(config={"reward_fn": "smooth"})
     state_space = 5
     action_space = 2
     layers = [40, 24]

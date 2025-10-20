@@ -5,7 +5,7 @@ from algs.launcher import learn_policy_problem, learn_problem, result_learning
 from algs.ppo.ppo_agent import Agent
 
 # Use a backend that supports dynamic plotting
-matplotlib.use("TkAgg")
+matplotlib.use("Agg")
 plt.ion()  # Turn on interactive mode
 
 from examples.custom_env.cartpole_leftright_env import CartPoleLeftRightEnv

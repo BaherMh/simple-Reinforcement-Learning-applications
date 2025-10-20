@@ -1,14 +1,16 @@
 import math
-import numpy as np
 from typing import Optional, Union
+
 import gymnasium as gym
-from gymnasium.envs.classic_control.cartpole import CartPoleEnv
-from gymnasium import spaces, logger
-import pygame
-from pygame import gfxdraw
-import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use("TkAgg")
+import matplotlib.pyplot as plt
+import numpy as np
+import pygame
+from gymnasium import logger, spaces
+from gymnasium.envs.classic_control.cartpole import CartPoleEnv
+from pygame import gfxdraw
+
+matplotlib.use("Agg")
 
 
 class CartPoleLeftRightEnv(CartPoleEnv):
