@@ -1,7 +1,7 @@
-from algs.dqn.memory import Memory
 import numpy.random as rnd
-from algs.dqn.models import build_dense
 import torch
+from algs.dqn.memory import Memory
+from algs.dqn.models import build_dense
 
 
 class PytorchDqnAgent():

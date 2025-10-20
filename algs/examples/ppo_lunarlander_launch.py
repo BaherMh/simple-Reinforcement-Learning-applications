@@ -1,8 +1,9 @@
 import gymnasium as gym
-from algs.ppo.ppo_agent import Agent
-from algs.launcher import learn_problem, result_learning, learn_policy_problem
-import matplotlib.pyplot as plt
 import matplotlib
+import matplotlib.pyplot as plt
+from algs.launcher import learn_policy_problem, learn_problem, result_learning
+from algs.ppo.ppo_agent import Agent
+
 matplotlib.use("TkAgg")
 
 
@@ -18,7 +19,7 @@ def main():
     layers = [64, 64]
     agent = Agent(n_actions=action_space, batch_size=batch_size, input_dims=state_space,
                   layers=layers, alpha=alpha, n_epochs=n_epochs)
-    need_render = True
+    need_render = False
     episodes = 2000
     max_steps = 500
     scores, values, adv = learn_policy_problem(env, agent, episodes, max_steps, N, need_render)

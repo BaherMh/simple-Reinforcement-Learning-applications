@@ -1,12 +1,14 @@
 import os
+
 import numpy as np
 import torch as T
-from algs.ppo.ppo_memory import PPOMemory
 from algs.ppo.networks import ActorNetwork, CriticNetwork
+from algs.ppo.ppo_memory import PPOMemory
+
 
 class Agent:
     def __init__(self, input_dims, n_actions, layers,
-                 gamma=0.99, alpha=0.0003, gae_lambda=0.95, policy_clip=0.2,
+                 gamma=0.99, alpha=0.0003, gae_lambda=0.95, policy_clip=0.1,
                  batch_size=64, n_epochs=4):
         self.gamma = gamma
         self.policy_clip = policy_clip
@@ -29,15 +31,28 @@ class Agent:
     def store_dones(self, dones):
         self.memory.store_dones(dones)
 
-    def choose_action(self, observation):
+    def choose_action(self, observation, deterministic=False):
         state = T.tensor([observation], dtype=T.float).to(self.actor.device)
         dist = self.actor(state)
         value = self.critic(state)
-        action = dist.sample()
-        probs = T.squeeze(dist.log_prob(action)).item()
-        action = T.squeeze(action).item()
+
+        if deterministic:
+            # Take the most likely action (mean for continuous, argmax for discrete)
+            action = dist.probs.argmax().item()  # For discrete actions (like in CartPole)
+        else:
+            # Sample from the distribution (used during training)
+            action = dist.sample().item()
+
+        # Optional: log probability of the chosen action (useful for debugging)
+        probs = T.squeeze(dist.log_prob(T.tensor([action]).to(self.actor.device))).item()
         value = T.squeeze(value).item()
+
         return action, probs, value
+
+
+    def act(self, observation, deterministic=True):
+        return self.choose_action(observation, deterministic)[0]
+
 
     def compute_discount_rewards(self, ep_rewards_arr):
         batch_rtgs = []

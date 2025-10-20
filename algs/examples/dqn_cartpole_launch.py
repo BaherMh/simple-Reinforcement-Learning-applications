@@ -1,6 +1,7 @@
 import gymnasium as gym
-import matplotlib.pyplot as plt
 import matplotlib
+import matplotlib.pyplot as plt
+
 matplotlib.use("TkAgg")
 from algs.dqn.dqn_agent import PytorchDqnAgent
 from algs.launcher import learn_problem, result_learning
@@ -13,7 +14,7 @@ def main():
     action_space = 2
     layers = [20, 12]
     agent = PytorchDqnAgent(state_space, action_space, layers)
-    need_render = True
+    need_render = False
     episodes = 100
     max_steps = 200
     scores = learn_problem(env, agent, episodes, max_steps, need_render)
