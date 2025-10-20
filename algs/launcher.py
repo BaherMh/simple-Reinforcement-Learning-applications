@@ -87,17 +87,57 @@ def learn_policy_problem(env, agent, episodes, max_steps, N, need_render, callba
 
     return scores, values, adv
 
-def result_learning(env, agent, max_steps):
-    agent.epsilon = 0.0
-    while True:
-        state = env.reset()[0]
+import gymnasium as gym
+import imageio
+import numpy as np
+from IPython.display import Video, display
+
+
+def result_learning(env, agent, max_steps, num_episodes=5):
+    """
+    Run trained agent in environment, record videos of episodes, and display them.
+    
+    Args:
+        env: The environment (should support render_mode='rgb_array')
+        agent: Trained agent with .act() method
+        max_steps: Maximum steps per episode
+        num_episodes: Number of episodes to run and save
+    """
+    # Ensure the environment uses rgb_array for rendering
+
+    agent.epsilon = 0.0  # No exploration
+    all_frames = []
+    scores = []
+
+    for ep in range(num_episodes):
+        state, _ = env.reset()
         score = 0
-        for i in range(max_steps):
-            env.render()
+        frames = []  # Store frames for this episode
+        
+        for step in range(max_steps):
+            # Render to RGB array and store
+            frame = env.render(mode='rgb_array')
+            frames.append(frame)
+            
             action = agent.act(state)
             next_state, reward, done, _, _ = env.step(action)
             score += reward
             state = next_state
+            
             if done:
                 break
-        print("score: {}".format(score))
+
+        print(f"Episode {ep + 1}: Score = {score}")
+        scores.append(score)
+        all_frames.extend(frames)  # Add all frames from this episode
+
+    env.close()
+
+    # Save as MP4
+    print("\nSaving evaluation video...")
+    imageio.mimwrite('evaluation.mp4', np.array(all_frames), fps=30)
+
+    # Display video in Colab
+    display(Video('evaluation.mp4', embed=True))
+
+    print(f"\nAverage score over {num_episodes} episodes: {np.mean(scores):.2f}")

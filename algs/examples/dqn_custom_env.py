@@ -18,7 +18,7 @@ def main():
     agent = PytorchDqnAgent(state_space, action_space, layers)
     
     need_render = False
-    episodes = 2000
+    episodes = 200
     max_steps = 500
 
     # Setup live plot with dynamic scaling
@@ -28,7 +28,7 @@ def main():
     # 🔁 Remove fixed limits — let matplotlib auto-scale
     ax.set_xlabel("Episode")
     ax.set_ylabel("Score")
-    ax.set_title("DQN Training - Live Score (Auto-Scaled)")
+    ax.set_title("DQN Training - Live Score")
     ax.legend()
     plt.tight_layout()
 
