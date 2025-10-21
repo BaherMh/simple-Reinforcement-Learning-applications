@@ -25,8 +25,8 @@ def learn_problem(env, agent, episodes, max_steps, need_render, callback=None):
 
         # End of episode cleanup (e.g., decay epsilon, etc.)
         agent.end_episode()
-
-        print("episode: {}/{}, score: {}".format(e, episodes, score))
+        if e%200 == 0:
+            print("episode: {}/{}, score: {}".format(e, episodes, score))
         scores.append(score)
 
         # 🔁 Call callback if provided
@@ -73,8 +73,8 @@ def learn_policy_problem(env, agent, episodes, max_steps, N, need_render, callba
         agent.store_ep(ep_rewards)
         agent.store_val(ep_values)
         agent.store_dones(ep_dones)
-
-        print("episode: {}/{}, score: {}".format(e, episodes, score))
+        if e%200 == 0:
+            print("episode: {}/{}, score: {}".format(e, episodes, score))
         scores.append(score)
 
         if callback is not None:
@@ -126,8 +126,8 @@ def result_learning(env, agent, max_steps, num_episodes=5):
             
             if done:
                 break
-
-        print(f"Episode {ep + 1}: Score = {score}")
+        if ep % 200==0 :
+            print(f"Episode {ep + 1}: Score = {score}")
         scores.append(score)
         all_frames.extend(frames)  # Add all frames from this episode
 

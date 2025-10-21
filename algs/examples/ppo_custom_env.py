@@ -36,7 +36,8 @@ def main():
     scores = []
 
     def callback(ep_idx, score):
-        print(f"Episode {ep_idx}: Score = {score}")
+        if ep_idx%200 == 0:
+            print(f"Episode {ep_idx}: Score = {score}")
         scores.append(score)
 
         # Update plot data
