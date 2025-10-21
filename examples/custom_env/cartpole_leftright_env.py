@@ -10,7 +10,7 @@ from gymnasium import logger, spaces
 from gymnasium.envs.classic_control.cartpole import CartPoleEnv
 from pygame import gfxdraw
 
-# matplotlib.use("Agg")
+matplotlib.use("Agg")
 
 
 class CartPoleLeftRightEnv(CartPoleEnv):
