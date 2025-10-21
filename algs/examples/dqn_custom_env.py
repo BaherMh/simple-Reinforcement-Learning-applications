@@ -8,6 +8,7 @@ plt.ion()
 from algs.dqn.dqn_agent import PytorchDqnAgent
 from algs.launcher import learn_problem, result_learning
 from examples.custom_env.cartpole_leftright_env import CartPoleLeftRightEnv
+from IPython.display import clear_output
 
 
 def main():
@@ -35,20 +36,21 @@ def main():
     scores = []
 
     def callback(ep_idx, score):
-        if ep_idx%200 == 0:
-            print(f"Episode {ep_idx}: Score = {score}")
         scores.append(score)
-
-        # Update line data
+        
+        # Update plot data
         line.set_data(range(len(scores)), scores)
+        ax.relim()
+        ax.autoscale_view()
 
-        # 🔍 Auto-rescale the view
-        ax.relim()                    # Recompute data limits
-        ax.autoscale_view()           # Auto-scale X and Y axes
-
-        # Redraw
+        # Force redraw
         fig.canvas.draw()
         fig.canvas.flush_events()
+        
+        # Optional: throttle updates to every N episodes for smoother performance
+        if ep_idx % 10 == 0:  # Update every 10 episodes
+            clear_output(wait=True)
+            plt.pause(0.01)  # Small pause to allow GUI to catch up
 
     # Train with dynamic plot
     _ = learn_problem(env, agent, episodes, max_steps, need_render, callback=callback)
