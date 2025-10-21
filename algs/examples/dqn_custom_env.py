@@ -2,7 +2,7 @@ import gymnasium as gym
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use("Agg")
+# matplotlib.use("Agg")
 plt.ion()
 
 from algs.dqn.dqn_agent import PytorchDqnAgent

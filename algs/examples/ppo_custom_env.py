@@ -3,7 +3,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from IPython.display import clear_output, display
 
-matplotlib.use("Agg")
+# matplotlib.use("Agg")
 plt.ion()
 
 from algs.dqn.dqn_agent import PytorchDqnAgent
