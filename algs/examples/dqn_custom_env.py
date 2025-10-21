@@ -50,7 +50,7 @@ def main():
         # Optional: throttle updates to every N episodes for smoother performance
         if ep_idx % 1 == 0:  # Update every 10 episodes
             clear_output(wait=True)
-            plt.pause(0.001)  # Small pause to allow GUI to catch up
+            plt.pause(0.01)  # Small pause to allow GUI to catch up
 
     # Train with dynamic plot
     _ = learn_problem(env, agent, episodes, max_steps, need_render, callback=callback)
