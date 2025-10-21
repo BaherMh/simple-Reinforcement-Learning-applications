@@ -25,8 +25,8 @@ def learn_problem(env, agent, episodes, max_steps, need_render, callback=None):
 
         # End of episode cleanup (e.g., decay epsilon, etc.)
         agent.end_episode()
-        if e%200 == 0:
-            print("episode: {}/{}, score: {}".format(e, episodes, score))
+        
+        print("episode: {}/{}, score: {}".format(e, episodes, score))
         scores.append(score)
 
         # 🔁 Call callback if provided
